@@ -1,0 +1,35 @@
+while True:
+        print("\nМеню кав'ярні:")
+        for item, price in menu.items():
+            print(f"{item}: {price} грн")
+
+        item_name = input("\nВведіть назву товару (або 'закінчити' для завершення замовлення): ").capitalize()
+
+        if item_name == 'Закінчити':
+            break
+
+        if item_name not in menu:
+            print("Такого товару немає у меню.")
+            add_new_item = input("Хочете додати його до меню? (так/ні): ").lower()
+
+            if add_new_item == 'так':
+                item_price = float(input("Введіть ціну за одиницю товару: "))
+                menu[item_name] = item_price
+            else:
+                continue
+
+        quantity = int(input(f"Введіть кількість {item_name}: "))
+        cost_per_unit = menu[item_name]
+        total_cost += cost_per_unit * quantity
+
+        order[item_name] = {'Кількість': quantity, 'Ціна за одиницю': cost_per_unit, 'Вартість': cost_per_unit * quantity}
+
+    print("\nЗамовлення:")
+    for item, details in order.items():
+        print(f"{item}: {details['Кількість']} x {details['Ціна за одиницю']} грн = {details['Вартість']} грн")
+
+    print(f"\nЗагальна вартість замовлення: {total_cost} грн")
+
+
+if name == "main":
+    main()
